@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1.Basic_Declaration.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="2.Basic_Declarations.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3.Address_Value_Operator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4.Pointer_Addition.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="5.Add_Numbers_by_Reference.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6.Maximum_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="7.Array_Elements_Pointer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="8.Permutation_String.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="9.Largest_Number_Malloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.String_Lenght.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="11.Swap_Numbers_by_Reference.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="12.Factorial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="13.Vowels_Consonants.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="14.Sort_Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="14.Insertion_Sort_Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="15.Return_Pointer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="16.Sum_Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="17.Array_Reverse_Order.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="18.Employee_Pointer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="19.Pointer_to_Union.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="20.Array_Structs_Ponters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="21.All_Alphabets_Pointers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="22.Reverse_String.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

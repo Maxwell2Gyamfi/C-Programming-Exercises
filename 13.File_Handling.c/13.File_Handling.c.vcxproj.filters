@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1.Create_File.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="2.Read_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3.Write_Lines.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4.Store_file_to_Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="5.Numberof_lines.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6.Content_file_number_of_lines.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="7.Word_Count_Characters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="8.Delete_line.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="9.Replace_line.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.Delete_All_Lines.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="11.Append_to_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="12.Copy_to_new_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="13.Merge_files.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="14.Encrypt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="15.Decrypt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="16.Delete_file.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="17.Most_sales.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="18.Password_Login.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Downloads\mastermind(3)updated.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="merge_sort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+</Project>

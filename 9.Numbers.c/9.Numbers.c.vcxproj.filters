@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1.Ugly_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="2.Abundant_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3.Abundant_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4.Deficient_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="5.Deficient_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6.Kaprekar_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="7.Kaprekar_less_1000.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="8.Lychrel_numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="9.Lychrel_number_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.Narcissistic_decimal_numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="11.Lucas_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="12.Catalan_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="13.Happy_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="14.Happy_Numbers_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="15.Disarium_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="16.Disarium_Numbers_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="17.Harsad_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="18.Harshad_Numbers_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="19.Pronic_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="20.Pronic_Numbers_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="21.Atrophic_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="22.Atrophic_Number_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="23.Duck_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="24.Amicable_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="26.Amicable_Pairs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="27.Circular_Prime.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="28.Circular_Prime_Number_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="29.Perfect_Cube.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="30.Fermant_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="31.Sum_of_two_cubes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="32.Mersene_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="33.Mersene_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="34.Narcissistic_decimal_numbers_range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="35.Pell_Series_Range.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="36.Keith_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="37.Keith_Number_Explanation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

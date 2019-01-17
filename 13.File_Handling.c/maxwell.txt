@@ -1,0 +1,6 @@
+Emma 12 3
+Reor 10 5
+Werta 8 2
+Ori 3 5
+Emma 19 4
+Ori 20 7

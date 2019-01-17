@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1.Name.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="2.Fstring.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3.BigC.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4.ReverseString.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="5.Perimeter_Area.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6.Perimeter_Area_Circle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="7.DisplayMultipleVariables.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="8.DaystoWeek.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="9.Sum_Integers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.Item_weights_float.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="11.EmployeeSalary.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="12.Biggest_number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="13.Bike_Average.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="14.Distance_Coordinates.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="15.MoneyBreakdown.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="16.IntegertoHour.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="17.DaystoYears.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="18.Correct_Values.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="19. Bhaskaras_formula.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="20.Range_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="21.Odd_Sum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="22.Triangle_Sort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="23.Multiplied.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="24.Month.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="25.Even_numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="26.Positive_Negative_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="27.Positive_Numbers_Count.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="28.Test_Palindrome.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="29.SumOdd_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="30.Square_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="31.Positive_Negative_Even_Odd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="32.Remainder_3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="33.HighestNumber_Position.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="34.Lowest_to_Highest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="35.Descending_Ascending.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="36.Password_1234.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="37.Quadrant_Coordinates.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="38.Divide_First_Second.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="39.Not_17_Divisible.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="40.Divisible_2_3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="41.3_Lines.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="42.Square_Cube.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="43.Two_Numbers_Sequence.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="44.Quit_Zero.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="45.S_Value.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="46.Value_S_2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="47.Integer_Divisor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="48.Array_size7.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="49.Triple_Array_Element.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="50.Less_Than_5_Value.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="51.Change_values.array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="52.Smallest_and_Position.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="11.EmployeeSalary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

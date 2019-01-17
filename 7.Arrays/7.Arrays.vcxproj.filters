@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1.Store_Elements.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="2.Reverse_Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3.Sum_Array_Elements.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4.Copy_Array_Elements.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="5.Duplicate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6.Unique_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="7.Merge_Arrays.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="8.Occurance.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="9.Maximum_Minimum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="11.Merge_Sort_Ascending.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.Odd_Even_Seperate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="12.Merge_Descending_Order.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="13.Insert_New_Value.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="14.Insert_New_Value_Unsorted.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="15.Delete_Array.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="16.Second_Largest_Element.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="17.Second_Smaller.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="18.2d_Arrays.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="19.2D_Array_Addition.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="20.2D_Array_Subtraction.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="21.2D_Array_Multiplication.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="22.Transpose.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="23.Sum_Right_Diagonal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="24.Sum_Left_Diagonal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="25.Sum_row_columns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="26.Lower_Triangular.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="27.Upper_Triangular.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="28.Determinant_Matrice.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="29.Sparse_Matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="30.Equal_Matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="31.Identity_Matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="32.Delete_Duplicate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

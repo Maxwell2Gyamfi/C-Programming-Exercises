@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1.Natural_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="2.Sum_First_Natural_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3.N_Natural_Numbers_Sum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4.10Numbers_Average.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="5.Cube_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="6.Moltiplication_Table.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="7.Vertical_Moltiplication_Table.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="8.Odd_number_Terms.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="9.Asterisk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="10.Right_Angle_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="11.Right_Angle_Same_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="12.New_Row.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="13.Pyramid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="14.Pyramd_Asterick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="15.Factorial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="16.N_Even_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="17.Even_Natural_Numbers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="18.Pyramid_Same_Number.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="19.Harmonic_Serie.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
