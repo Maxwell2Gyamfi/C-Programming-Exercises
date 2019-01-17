@@ -5,10 +5,10 @@
 *         will allow them either to create a new account or login with their credentials.
 *   
 *       -Main functionalities are:
-*          -Login with Email and Password:if successfully logged in will be presente with the 
-*           specific warehouse systems menu(Admin/User mode).
+*       -Login with Email and Password:if successfully logged in will be presente with the 
+*        specific warehouse systems menu(Admin/User mode).
 *
-*		        Admin Mode Functionalities consists of :
+*		-Admin Mode Functionalities consists of :
 *			    -  Switch to User Mode
 *		        -  Display all users accounts
 *	            -  Search a user account
@@ -16,7 +16,7 @@
 *	            -  Remove account from suspended list
 *               -  Change Password
 *              
-*               User Mode Functionalities consists of:
+*       -User Mode Functionalities consists of:
 *               - Add an Item to warehouse
 *	            - View all warehouse items
 *	            - Search an Item in warehouse
@@ -24,8 +24,8 @@
 *	            - Change personal password
 *	            - Delete personal account
 *
-*	     - Create new account: which allows user to create a new account if not present
-*          in the system.
+*	    -Create new account: which allows user to create a new account if not present
+*        in the system.
 *
 * User-interface variables:-
 *		*OUT (Return values):
