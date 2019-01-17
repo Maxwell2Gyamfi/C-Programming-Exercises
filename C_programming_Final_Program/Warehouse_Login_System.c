@@ -9,12 +9,12 @@
 *           specific warehouse systems menu(Admin/User mode).
 *
 *		        Admin Mode Functionalities consists of :
-*			    - Switch to User Mode
-*		        - Display all users accounts
-*	            - Search a user account
-*	            - Suspend a user account
-*	            - Remove account from suspended list
-*               - Change Password
+*			    -  Switch to User Mode
+*		        -  Display all users accounts
+*	            -  Search a user account
+*	            -  Suspend a user account
+*	            -  Remove account from suspended list
+*               -  Change Password
 *              
 *               User Mode Functionalities consists of:
 *               - Add an Item to warehouse
