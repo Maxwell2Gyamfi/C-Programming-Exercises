@@ -1,38 +1,38 @@
 /*******************************************************************************************
 * Program Description:
-*       -This program will allow a client to manage precious items disposed in a warehouse. 
-*         At the start of the program the user will be presented with the Main Menu which
-*         will allow them either to create a new account or login with their credentials.
+*    -This program will allow a client to manage precious items disposed in a warehouse. 
+*     At the start of the program the user will be presented with the Main Menu which
+*     will allow them either to create a new account or login with their credentials.
 *   
-*       -Main functionalities are:
-*       -Login with Email and Password:if successfully logged in will be presente with the 
-*        specific warehouse systems menu(Admin/User mode).
+* Main functionalities are:
+*    -Login with Email and Password:if successfully logged in will be presente with the 
+*     specific warehouse systems menu(Admin/User mode).
 *
-*		-Admin Mode Functionalities consists of :
-*			    -  Switch to User Mode
-*		        -  Display all users accounts
-*	            -  Search a user account
-*	            -  Suspend a user account
-*	            -  Remove account from suspended list
-*               -  Change Password
+*    -Admin Mode Functionalities consists of :
+*	   -Switch to User Mode
+*	   -Display all users accounts
+*	   -Search a user account
+*	   -Suspend a user account
+*	   -Remove account from suspended list
+*      -Change Password
 *              
-*       -User Mode Functionalities consists of:
-*               - Add an Item to warehouse
-*	            - View all warehouse items
-*	            - Search an Item in warehouse
-*	            - Delete an Item from warehouse
-*	            - Change personal password
-*	            - Delete personal account
+*     -User Mode Functionalities consists of:
+*      -Add an Item to warehouse
+*	   -View all warehouse items
+*	   -Search an Item in warehouse
+*	   -Delete an Item from warehouse
+*	   -Change personal password
+*	   -Delete personal account
 *
-*	    -Create new account: which allows user to create a new account if not present
-*        in the system.
+*	  -Create new account: which allows user to create a new account if not present
+*      in the system.
 *
 * User-interface variables:-
-*		*OUT (Return values):
+*	   *OUT (Return values):
 *			- int : Success indicator (0 failure, 1 success)
-*		*IN (Value Parameters):
+*	   *IN (Value Parameters):
 *			- Uses Value Parameters
-*		*IN and OUT (Reference Parameters):
+*	   *IN and OUT (Reference Parameters):
 *			- Uses Reference Parameters
 *
 * History [Date (Author): Description)]:-
