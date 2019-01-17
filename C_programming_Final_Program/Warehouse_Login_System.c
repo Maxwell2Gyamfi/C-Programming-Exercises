@@ -1,16 +1,61 @@
+/*******************************************************************************************
+* Program Description:
+*       -This program will allow a client to manage precious items disposed in a warehouse. 
+*         At the start of the program the user will be presented with the Main Menu which
+*         will allow them either to create a new account or login with their credentials.
+*   
+*       -Main functionalities are:
+*          -Login with Email and Password:if successfully logged in will be presente with the 
+*           specific warehouse systems menu(Admin/User mode).
+*
+*		        Admin Mode Functionalities consists of :
+*			    - Switch to User Mode
+*		        - Display all users accounts
+*	            - Search a user account
+*	            - Suspend a user account
+*	            - Remove account from suspended list
+*               - Change Password
+*              
+*               User Mode Functionalities consists of:
+*               - Add an Item to warehouse
+*	            - View all warehouse items
+*	            - Search an Item in warehouse
+*	            - Delete an Item from warehouse
+*	            - Change personal password
+*	            - Delete personal account
+*
+*	     - Create new account: which allows user to create a new account if not present
+*          in the system.
+*
+* User-interface variables:-
+*		*OUT (Return values):
+*			- int : Success indicator (0 failure, 1 success)
+*		*IN (Value Parameters):
+*			- Uses Value Parameters
+*		*IN and OUT (Reference Parameters):
+*			- Uses Reference Parameters
+*
+* History [Date (Author): Description)]:-
+*   2019-17-01 (Maxwell Gyamfi): Warehouse Login Systems
+*******************************************************************************************/
+
+//disables visual studio default functions
 #pragma warning(disable:4996)
+
+// Standard C library header files (#include ....):
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
+//definitions
 #define EMAIL_LENGHT 20
 #define PASSWORD_LENGHT 15
 #define MAX_LENGHT_DESCRIPTION 40
 #define MAX_ACCOUNTS 9999
 #define POUND_SIGN 156
 
-
+//Record data-types declarations
 typedef struct Items
 {
 	int item_number;
@@ -19,6 +64,7 @@ typedef struct Items
 
 }items;
 
+//Record data-types declarations
 typedef struct User
 {
 	int user_id;
@@ -31,6 +77,7 @@ typedef struct User
 
 }userdetails;
 
+//Record data-types declarations
 typedef struct Items_linked_list
 {
 	items item;
@@ -38,7 +85,7 @@ typedef struct Items_linked_list
 
 }linked_list_items;
 
-
+//Function prototypes/declarations
 void insert(items user_items, linked_list_items **item);
 void get_valid_string(char *string);
 void display_items(linked_list_items * start);
@@ -94,17 +141,20 @@ void send_email(struct User *user, int position);
 
 int main()
 {
+	//local variables
 	int choice = 0;
 	int count = 0;
 
+	//allocate memory for user accounts
 	userdetails *users =(userdetails*)calloc(MAX_ACCOUNTS,sizeof(userdetails));
 	count = read_users_file(users,"all_users.txt");
 	
 	
 	do
 	{
-		system("cls");
+		system("cls");//clear screen
 		main_display_menu();
+		//action selection menu
 		choice = get_valid_integer(1, 3);
 		switch (choice)
 		{
@@ -123,10 +173,11 @@ int main()
 			break;
 		}
 	} while (choice != 3);
-
+	//free dynaically allocated memory
 	free(users);
 	return 0;
 }
+
 void main_display_menu()
 {
 	printf("\n\n");
