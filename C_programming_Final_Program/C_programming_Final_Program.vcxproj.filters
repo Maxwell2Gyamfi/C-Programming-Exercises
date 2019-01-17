@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Warehouse_Login_System.c">
+    <ClCompile Include="..\..\..\..\..\Desktop\Warehouse Systems\Warehouse_Login_System.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
