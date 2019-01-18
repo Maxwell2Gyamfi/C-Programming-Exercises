@@ -2035,8 +2035,9 @@ int load_default_file(linked_list_items** head)
 
 	if (file == NULL)
 	{
-		printf("Error opening file");
-		return;
+		printf("Error default file was not found!!");
+		Pause();
+		exit(0);
 	}
 	while (fscanf(file, "%d %s %f", &value, buffer, &value2)==3)
 	{
