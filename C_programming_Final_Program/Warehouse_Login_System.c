@@ -14,7 +14,7 @@
 *	   -Search a user account
 *	   -Suspend a user account
 *	   -Remove account from suspended list
-*      -Change Password
+*          -Change Password
 *              
 *     -User Mode Functionalities consists of:
 *      -Add an Item to warehouse
@@ -24,8 +24,8 @@
 *	   -Change personal password
 *	   -Delete personal account
 *
-*	  -Create new account: which allows user to create a new account if not present
-*      in the system.
+*	   -Create new account: which allows user to create a new account if not present
+*           in the system.
 *
 * User-interface variables:-
 *	   *OUT (Return values):
