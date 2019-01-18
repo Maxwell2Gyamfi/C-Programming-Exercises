@@ -190,7 +190,7 @@ int main()
 *			- NONE
 *	*IN (Value Parameters):
 *			- NONE
-*		*IN and OUT (Reference Parameters):
+*	*IN and OUT (Reference Parameters):
 *			- NONE
 *
 * History [Date (Author): Description)]:-
@@ -221,7 +221,7 @@ void main_display_menu()
 *			- int value
 *	*IN (Value Parameters):
 *			- int minimum, int maximum
-*		*IN and OUT (Reference Parameters):
+*	*IN and OUT (Reference Parameters):
 *			- NONE
 *
 * History [Date (Author): Description)]:-
@@ -282,7 +282,7 @@ int get_valid_integer(int minimum, int maximum)
 *			- char input
 *	*IN (Value Parameters):
 *			- NONE
-*		*IN and OUT (Reference Parameters):
+*	*IN and OUT (Reference Parameters):
 *			- NONE
 *
 * History [Date (Author): Description)]:-
