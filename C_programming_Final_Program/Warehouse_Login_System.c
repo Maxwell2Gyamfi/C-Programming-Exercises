@@ -5,8 +5,8 @@
 *     will allow them either to create a new account or login with their credentials.
 *   
 * Main functionalities are:
-*    -Login with Email and Password:if successfully logged in will be presente with the 
-*     specific warehouse systems menu(Admin/User mode).
+*    -Login with Email and Password:if successfully logged in, will be presented with the 
+*     main warehouse systems menu(Admin/User mode).
 *
 *    -Admin Mode Functionalities consists of :
 *	   -Switch to User Mode
@@ -177,7 +177,25 @@ int main()
 	free(users);
 	return 0;
 }
-
+/**************************************************************************
+* Function Name: main_display_menu()
+*
+* Funtion Description:
+*   -This function displays the main menu of the program prompting the user
+*    to select an option between, login with email and password and create
+*    a new user account.
+*          
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*		*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): displays main menu
+****************************************************************************/
 void main_display_menu()
 {
 	printf("\n\n");
@@ -188,8 +206,30 @@ void main_display_menu()
 	printf("  3 ---> Exit program\n\n");
 	printf("---> Select an option(1-3): ");
 }
+
+/*******************************************************************************
+* Function Name: get_valid_integer(int minimum, int maximum)
+*
+* Funtion Description:
+*   -This function requests a user to input an integer value between a mini-
+*    mum and a maximum. It will prompt the user to re-input integer value and
+*    display a specific error message if wrong input provided. It returns 
+*    correct integer value if provided.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- int value
+*	*IN (Value Parameters):
+*			- int minimum, int maximum
+*		*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): gets valid integer input
+*******************************************************************************/
 int get_valid_integer(int minimum, int maximum)
 {
+	//local variables
 	int sum = 0;
 	int lenght = 0;
 	int value = 0;
@@ -197,23 +237,24 @@ int get_valid_integer(int minimum, int maximum)
 	char buffer[10];
 	do
 	{
-		fgets(buffer, sizeof(buffer), stdin);
-		lenght = get_string_length(buffer);
+
+		fgets(buffer, sizeof(buffer), stdin);//request string input
+		lenght = get_string_length(buffer);//calculate string lenght
 		buffer[lenght-1] = '\0';
 		lenght = lenght - 1;
 
-		if (isfloat(buffer,lenght))
+		if (isfloat(buffer,lenght))//checks if float value
 		{
 			printf("\nYou entered a float value, please try again(%d-%d): ",minimum,maximum);
 		}
-		else if (!is_integer(buffer, lenght))
+		else if (!is_integer(buffer, lenght))//checks if special character inputted
 		{
 			printf("\nYou didnt enter an integer, please try again(%d-%d): ", minimum, maximum);
 		}
 		else
 		{
-			value = convert_string_to_integer(buffer,0,lenght,sum);
-			if (value< minimum || value > maximum)
+			value = convert_string_to_integer(buffer,0,lenght,sum);//convert value to integer
+			if (value< minimum || value > maximum)//changes integer range
 			{
 				printf("\nThe value is out of range, try again(%d-%d): ", minimum, maximum);
 			}
@@ -227,16 +268,37 @@ int get_valid_integer(int minimum, int maximum)
 	} while (success == 0);
 
 }
+
+/********************************************************************
+* Function Name: char get_valid_yes_or_no()
+*
+* Funtion Description:
+*   -This function requests a user to input a character 'Y'or 'N'
+*   -Display specific error message and request to re-input correct
+*    input until provided. It will returns the correct character
+*   
+* User-interface variables:-
+*	*OUT (Return values):
+*			- char input
+*	*IN (Value Parameters):
+*			- NONE
+*		*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): gets valid yes or no
+***********************************************************************/
 char get_valid_yes_or_no()
 {
+	//local variables
 	char input=0;
 	int success = 0;
 	do
 	{
-		scanf("%c%*c", &input);
+		scanf("%c%*c", &input);//request character and discards scanf buffer
 		if (isalpha(input))
 		{
-			input = toupper(input);
+			input = toupper(input);//convert character to upper-case
 			if (input == 'Y' || input == 'N')
 			{
 				success = 1;
@@ -250,10 +312,31 @@ char get_valid_yes_or_no()
 
 	return input;
 }
+
+/********************************************************************
+* Function Name: isfloat(char *string,int length)
+*
+* Funtion Description:
+*   -This function checks if a '.' character is present in an array
+*    of characters.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- char *string,int length
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks if string has '.' value
+***********************************************************************/
 int isfloat(char *string,int length)
 {
+	//local variable
 	int i = 0;
 	
+	//loops and look for '.' character
 	for (i = 0; i < length; i++)
 	{
 		if (string[i] == '.')
@@ -263,10 +346,31 @@ int isfloat(char *string,int length)
 	}
 	return 0;
 }
+
+/********************************************************************
+* Function Name: int is_integer(char *string,int length)
+*
+* Funtion Description:
+*   -This function checks if an array of characters contains only 
+*    numeric values.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- char *string,int length
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks if string has '.' value
+***********************************************************************/
 int is_integer(char *string,int length)
 {
+	//local variable
 	int i = 0;
 
+	//loops and checks if all characters in array are numeric
 	for (i = 0; i < length; i++)
 	{
 		if (string[i] >= '0' && string[i] <='9'){}
