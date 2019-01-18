@@ -857,10 +857,29 @@ void get_valid_email(int number_of_accounts,struct User *users,int login,char *e
 		}
 	} while (success == 0);
 }
+
+/***************************************************************************************
+* Function Name: email_exist(struct User *users, int number_of_accounts,char *string)
+*
+* Funtion Description:
+*   -This function checks if user provided email input exists already in the system
+*   
+* User-interface variables:-
+*	*OUT (Return values):
+*			- bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- struct User *users, int number_of_accounts,char *string
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks for email presence in system
+******************************************************************************************/
 int email_exist(struct User *users, int number_of_accounts,char *string)
 {
-
+	//local variable
 	int i = 0;
+	//loops and compare provided email to system emails
 	for (i = 0; i < number_of_accounts; i++)
 	{
 		if (strcmp(string, users[i].user_email)==0)
@@ -870,9 +889,30 @@ int email_exist(struct User *users, int number_of_accounts,char *string)
 	}
 	return 0;
 }
+
+/***************************************************************************************
+* Function Name: has_at_email(char *string, int lenght)
+*
+* Funtion Description:
+*   -This function checks if a string a has an '@' character
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- char *string, int lenght
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks for '@ ' character in string
+******************************************************************************************/
 int has_at_email(char *string, int lenght)
 {
+	//local variable
 	int i = 0;
+
+	//loops and checks for '@' character
 	for (i = 0; i < lenght; i++)
 	{
 		if (string[i] == '@')
@@ -882,16 +922,37 @@ int has_at_email(char *string, int lenght)
 	}
 	return 0;
 }
+
+/***************************************************************************************
+* Function Name: has_domain(char *string, int lenght)
+*
+* Funtion Description:
+*   -This function checks if a string has a correct email domain
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- char *string, int lenght
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks for correct email domain
+******************************************************************************************/
 int has_domain(char *string, int lenght)
 {
+	//local variables
 	int i = 0;
 	int j = 0;
 	char temp[20];
 	char string_domain[25];
 
+	//sets array values to 0;
 	memset(temp, 0, sizeof(temp));
 	memset(string_domain, 0, sizeof(string_domain));
 
+	//email domains
 	char domains[][25] = { "aol.com","att.net","comcast.net","facebook.com","gmail.com",
 						 "gmx.com","googlemail.com","google.com","hotmail.com","hotmail.co.uk",
 						 "mac.com","me.com", "mail.com","msn.com","live.com","sbcglobal.net",
@@ -904,19 +965,24 @@ int has_domain(char *string, int lenght)
 						 "ntlworld.com","o2.co.uk","orange.net","sky.com","talktalk.co.uk",
 						 "tiscali.co.uk","virgin.net","wanadoo.co.uk","bt.com","uwe.ac.uk"
 	};
+	
+	//copy domain starting from '@' character
 	while (string[i] != '\0')
 	{
+		//advance array until character found
 		if (string[i] == '@')
 		{
 			i++;
 			while (string[i] != '\0')
 			{
+				//copy domain to array
 				string_domain[j++] = string[i++];
 			}
 			break;
 		}
 		i++;
 	}
+	//loops and compare domain to systems domains
 	for (i = 0; i < 56; i++)
 	{
 		strcpy(temp, domains[i]);
