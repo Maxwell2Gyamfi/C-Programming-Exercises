@@ -381,10 +381,31 @@ int is_integer(char *string,int length)
 	}
 	return 1;
 }
+
+/********************************************************************
+* Function Name: get_string_length(char *string)
+*
+* Funtion Description:
+*   -This function calculates and returns the length of string
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- int count
+*	*IN (Value Parameters):
+*			- char *string
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): calculates string length
+***********************************************************************/
 int get_string_length(char *string)
 {
+	//local variables
 	int count = 0;
 	int i = 0;
+
+	//increment counts and i until reaches null character
 	while (string[i] != '\0')
 	{
 		count++;
@@ -392,17 +413,41 @@ int get_string_length(char *string)
 	}
 	return count;
 }
+/*************************************************************************************
+* Function Name: convert_string_to_integer(char *string,int count,int lenght,int sum)
+*
+* Funtion Description:
+*   -This function converts a string of integers into an integer value. It calls the
+*    appropriate switch case based on the lenght and it sums the character with a
+*    power of 10.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- int sum
+*	*IN (Value Parameters):
+*			- char *string,int count,int lenght,int sum
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): converts string to integer
+***************************************************************************************/
 int convert_string_to_integer(char *string,int count,int lenght,int sum)
 {
+
 	char arr_value = '\0';
+
+	//action selection based on string length
 	switch(lenght)
 	{
 	case 1:
+	    //sums array character with case power of 10 value
 		sum = convert_character_to_integer(arr_value, string, sum, 1, count);
 		return sum;
 		break;
 	case 2:
 		sum = convert_character_to_integer(arr_value, string, sum, 10, count);
+		//recursively call function with different array index and reduce string length
 		convert_string_to_integer(string, count+1, lenght-1, sum);
 		break;
 	case 3:
@@ -422,21 +467,62 @@ int convert_string_to_integer(char *string,int count,int lenght,int sum)
 		convert_string_to_integer(string, count + 1, lenght - 1, sum);
 		break;
 	default:
-		sum = atoi(string);
+		sum = atoi(string);//converts character to integer
 		return sum;
 		break;
 	}
 }
+
+/*************************************************************************************
+* Function Name: convert_character_to_integer(char character, char *string, int sum, 
+                 int value,int count)
+*
+* Funtion Description:
+*   -This function converts a single character based of array index to integer
+*   -It then multiplys converted value to the power of 10 value based
+*    on case selection and sums to sum variable
+
+* User-interface variables:-
+*	*OUT (Return values):
+*			- int sum
+*	*IN (Value Parameters):
+*			- char character, char *string, int sum, int value,int count
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): converts character to integer
+***************************************************************************************/
 int convert_character_to_integer(char character, char *string, int sum, int value,int count)
 {
 	int number = 0;
-	character = string[count];
-	number = character - '0';
-	sum += (number * value);
+	character = string[count];//gets character at array index
+	number = character - '0';//converts character to integer
+	sum += (number * value);//multiply number with power of 10 value and add to sum
 	return sum;
 }
+
+/***************************************************************************************
+* Function Name: create_account(int *count,struct User *new_user)
+*
+* Funtion Description:
+*   -This function allows a client to create a new account if not present in the system
+*   -It requests user eamil, password and sets the first account as admin.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- int *count,struct User *new_user
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): creates a new user account
+***************************************************************************************/
 int create_account(int *count,struct User *new_user)
 {
+	//local variables
 	char ptr[20];
 	char password[20];
 	int flag = 0;
@@ -449,6 +535,7 @@ int create_account(int *count,struct User *new_user)
 	printf(" ---> Input email: ");
 	get_valid_email(*count, new_user,0,ptr);
 
+	//request correct password input
 	while (flag == 0)
 	{
 		printf(" ---> Input password: ");
@@ -458,9 +545,11 @@ int create_account(int *count,struct User *new_user)
 		if (strcmp(ptr, password) == 0)flag = 1;
 		else printf("\nInputted password didn't match!!\n");
 	}
+	//encrypt password
 	cipher_password(ptr, new_user[*count].user_email, password, 0);
 	strcpy(new_user[*count].user_password, password);
 
+	//sets first account as admin
 	if (*count == 0)
 	{
 		new_user[*count].is_admin = 1;
@@ -473,6 +562,7 @@ int create_account(int *count,struct User *new_user)
 		new_user[*count].is_admin = 0;
 		new_user[*count].login_attempts = 3;
 	}
+	//assign unique id and increment count
 	new_user[*count].user_id = *count + 100;
 	new_user[*count].is_suspended= 0;
 	new_user[*count].total_items = 0;
@@ -481,8 +571,29 @@ int create_account(int *count,struct User *new_user)
 
 	printf("\nAccount created successfully!!!");
 }
+
+/***************************************************************************************
+* Function Name: void get_valid_password(char *password)
+*
+* Funtion Description:
+*   -This function request a user to input a password.
+*   -Will repeat and display specific error message if provided inuput does not meet 
+*    requirements.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- char *password
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): gets valid password
+******************************************************************************************/
 void get_valid_password(char *password)
 {
+	//local variables
 	int i = 0;
 	int k = 0;
 	int lenght = 0;
@@ -492,11 +603,11 @@ void get_valid_password(char *password)
 	int success = 0;
 	do
 	{
-		memset(buffer, 0, sizeof(buffer));
+		memset(buffer, 0, sizeof(buffer));//sets array values to 0
 		while(k<PASSWORD_LENGHT)
 		{
 			ch = getch();
-			if (ch == '\r')
+			if (ch == '\r')//breaks if new line charater is inputted
 			{
 				break;
 			}
@@ -504,13 +615,14 @@ void get_valid_password(char *password)
 			{
 				if (i > 0)
 				{
-					i--;
+					i--;//removes backspace character from array
 					k--;
 					printf("\b \b");
 				}
 			}
 			else
 			{
+				//masks password displaying '*' character
 				buffer[i++] = ch;
 				ch = '*';
 				printf("%c", ch);
@@ -543,16 +655,40 @@ void get_valid_password(char *password)
 
 	} while (success == 0);
 }
+
+/***************************************************************************************
+* Function Name: cipher_password(char *password,char *key,char *pswd,int value)
+*
+* Funtion Description:
+*   -This function encrypts and decrypts a password provided by user.
+*   -It first generate a key which is then summed or subracted to password
+*    based on switch value.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- char *password,char *key,int value
+*	*IN and OUT (Reference Parameters):
+*			- char *pswd
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): encrypts and decrypts password
+******************************************************************************************/
 void cipher_password(char *password,char *key,char *pswd,int value)
 {
+	//local variables
 	int i, j = 0;
+	//calculates password and key length
 	int len_password = strlen(password);
 	int len_key = strlen(key);
 
+	//dynamically allocates memory 
 	char *new_key = (char*)malloc(len_password*sizeof(char));
 	char *encrypted_msg = (char*)malloc(len_password*sizeof(char));
 	char *decrypted_msg = (char*)malloc(len_password*sizeof(char));
 
+	//loops and generate new key
 	for (i = 0,j=0; i < len_password; i++,j++)
 	{
 		if (j == len_key)
@@ -563,9 +699,11 @@ void cipher_password(char *password,char *key,char *pswd,int value)
 	}
 	new_key[i] = '\0';
 
+	//action selection menu
 	switch (value)
 	{
 	case 0:
+		//encrypts password by summing password to key and 'A' character
 		for (i = 0; i < len_password; i++)
 		{
 			encrypted_msg[i] = ((password[i] + new_key[i])) + 'A';
@@ -574,6 +712,7 @@ void cipher_password(char *password,char *key,char *pswd,int value)
 		strcpy(pswd, encrypted_msg);
 		break;
 	case 1:
+		//decrypts password by subracting password from key and 'A' character
 		for (i = 0; i < len_password; i++)
 		{
 			decrypted_msg[i] = ((password[i] - new_key[i])) - 'A';
@@ -585,9 +724,30 @@ void cipher_password(char *password,char *key,char *pswd,int value)
 		break;
 	}
 }
+
+/***************************************************************************************
+* Function Name: hasdigit(char *string,int lenght)
+*
+* Funtion Description:
+*   -This function checks if a string contains a numberic value.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- char *string,int lenght
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks for integer value
+******************************************************************************************/
 int hasdigit(char *string,int lenght)
 {
+	//local variable
 	int i = 0;
+
+	//loops and check for integer value
 	for (i = 0; i < lenght; i++)
 	{
 		if (string[i] >= '0' && string[i] <='9')
@@ -597,9 +757,30 @@ int hasdigit(char *string,int lenght)
 	}
 	return 0;
 }
+
+/***************************************************************************************
+* Function Name:  has_upper_case(char *string, int lenght)
+*
+* Funtion Description:
+*   -This function checks if a string contains at least one upper-case alphabet value .
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- char *string,int lenght
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks for upper-case alphabet value
+******************************************************************************************/
 int has_upper_case(char *string, int lenght)
 {
+	//local variable
 	int i = 0;
+
+	//loops and checks for upper-case alphabet
 	for (i = 0; i < lenght; i++)
 	{
 		if (string[i] >= 'A' && string[i] <= 'Z')
@@ -610,32 +791,56 @@ int has_upper_case(char *string, int lenght)
 	return 0;
 
 }
+
+/***************************************************************************************
+* Function Name: get_valid_email(int number_of_accounts,
+                 struct User *users,int login,char *email)
+*
+* Funtion Description:
+*   -This function prompts a user to input a valid email address.It will display a speci-
+*    fic error message and request input if wrong input is provided.
+*   -Based on login value it will either copy correct email-value to char email or 
+     struct *users
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- int number_of_accounts,struct User *users,int login
+*	*IN and OUT (Reference Parameters):
+*			- struct User *users,char *email
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): requests and check for valid email address
+******************************************************************************************/
 void get_valid_email(int number_of_accounts,struct User *users,int login,char *email)
 {
+	//local varaibles
 	char buffer[EMAIL_LENGHT];
 	int success = 0;
 	int lenght = 0;
 
 	do
 	{
+		//requests input 
 		fgets(buffer, sizeof(buffer), stdin);
 		lenght = get_string_length(buffer);
 		buffer[lenght - 1] = '\0';
 		lenght = lenght - 1;
 
-		if (lenght > EMAIL_LENGHT)
+		if (lenght > EMAIL_LENGHT)//checks string length
 		{
 			printf("\nEmail is too long,try again: ");
 		}
-		else if (!has_at_email(buffer,lenght))
+		else if (!has_at_email(buffer,lenght))//checks for '@character'
 		{
 			printf("\nAn email has at least one '@' character,try again: ");
 		}
-		else if (!has_domain(buffer,lenght))
+		else if (!has_domain(buffer,lenght))//checks for correct domain
 		{
 			printf("\nYou inputted a wrong domain,try again: ");
 		}
-		else if (email_exist(users, number_of_accounts,buffer))
+		else if (email_exist(users, number_of_accounts,buffer))//checks for email existence
 		{
 			if (login == 1)
 			{
@@ -647,10 +852,7 @@ void get_valid_email(int number_of_accounts,struct User *users,int login,char *e
 		}
 		else
 		{
-			login == 1?
-			    copy_string(buffer, email):
-				copy_string(buffer, users[number_of_accounts].user_email);
-
+			copy_string(buffer, users[number_of_accounts].user_email);
 			success = 1;	
 		}
 	} while (success == 0);
