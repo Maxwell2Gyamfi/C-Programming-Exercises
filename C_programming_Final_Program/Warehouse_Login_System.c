@@ -1473,6 +1473,7 @@ void unsuspend_user(struct User *user, int count)
 								user += i;
 								user->is_suspended = 0;
 								user->login_attempts = 3;
+								display_all_accounts(temp, count);
 								printf("\nAccount succesfully unsuspended!!!");
 								break;
 							}
@@ -1603,7 +1604,10 @@ int user_menu(struct User *user,int count,int position)
 		case 6:
 			count = remove_account(user,count,position,&head);
 			Pause();
-			return count;
+			if (position != 0)
+			{
+				return count;
+			}
 			break;
 		}
 	} while (choice != 7);
@@ -1614,6 +1618,7 @@ void append(linked_list_items **linked)
 {
 	linked_list_items * new_linked_list = malloc(sizeof(linked_list_items));
 	linked_list_items *last = *linked;
+	linked_list_items *start = *linked;
 	linked_list_items *temp = *linked;
 	items item;
 
@@ -1648,6 +1653,7 @@ void append(linked_list_items **linked)
 	if (*linked == NULL)
 	{
 		*linked = new_linked_list;
+		display_items(start);
 		printf("\nItem added successfully!!!");
 		Pause();
 		return;
@@ -1658,6 +1664,7 @@ void append(linked_list_items **linked)
 		last = last->next;
 	}
 	last->next = new_linked_list;
+	display_items(start);
 	printf("\nItem added successfully!!!");
 	
 
@@ -1677,8 +1684,8 @@ void display_items(linked_list_items * start)
 	
 	system("cls");
 	printf("\n\n");
-	printf("    DISPLAY ALL ITEMS\n");
-	printf("    -----------------\n");
+	printf("                  DISPLAY ALL ITEMS\n");
+	printf("                  -----------------\n");
 	if (start == NULL)
 	{
 		printf("\nThere are no items to be displayed");
@@ -1938,7 +1945,6 @@ void delete_item(linked_list_items** head)
 	if (current == NULL)
 	{
 		printf("Item was not found");
-		Pause();
 		return;
 	}
 
@@ -1950,13 +1956,11 @@ void delete_item(linked_list_items** head)
 		free(current);
 		display_items(*head);
 		printf("\nSelected item successfully removed!!!");
-		Pause();
 		return;
 	}
 	else
 	{
 		printf("\nSelected item was not removed!!!");
-		Pause();
 		return;
 	}
 
