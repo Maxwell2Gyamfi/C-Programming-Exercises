@@ -630,7 +630,7 @@ void get_valid_password(char *password)
 			}
 		}
 		lenght = get_string_length(buffer);
-		if (lenght > PASSWORD_LENGHT)
+		if (lenght > PASSWORD_LENGHT)//checks password length
 		{
 			printf("\nPassword is too long,try again: ");
 		}
@@ -638,11 +638,11 @@ void get_valid_password(char *password)
 		{
 			printf("\nPassword too short,try again: ");
 		}
-		else if(!hasdigit(buffer,lenght))
+		else if(!hasdigit(buffer,lenght))//checks if integer present
 		{
 			printf("\nYour password should contain at least an integer,try again: ");
 		}
-		else if (!has_upper_case(buffer, lenght))
+		else if (!has_upper_case(buffer, lenght))//checks for uppercase
 		{
 			printf("\nYour password should contain at least an upper-case character,try again: ");
 		}
@@ -993,18 +993,58 @@ int has_domain(char *string, int lenght)
 	}
 	return 0;
 }
+
+/***************************************************************************************
+* Function Name: copy_string(char *source, char*destination)
+*
+* Funtion Description:
+*   -This function copys one array of characters to another array
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- char *source
+*	*IN and OUT (Reference Parameters):
+*			- char*destination
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): copys characters to array
+******************************************************************************************/
 void copy_string(char *source, char*destination)
 {
+	//local variable
 	int i = 0;
-	int lenght = get_string_length(source);
+
+	int lenght = get_string_length(source);//calculate string length
 	for (i = 0; i < lenght; i++)
 	{
 		destination[i] = source[i];
 	}
 	destination[lenght] = '\0';
 }
+
+/***************************************************************************************
+* Function Name:  read_users_file(struct User *users,char *name)
+*
+* Funtion Description:
+*   -This function reads a text file containing data into record data type Struct User.
+*   -It then returns the number of items read.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- i(amount of data read)
+*	*IN (Value Parameters):
+*			- struct User *users,char *name
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): reads data from txt file
+******************************************************************************************/
 int read_users_file(struct User *users,char *name)
 {
+	//local variables
 	FILE *file;
 	int i = 0;
 	char s = 0;
@@ -1015,14 +1055,14 @@ int read_users_file(struct User *users,char *name)
 	}
 	while (s=fgetc(file))
 	{
-		if (s == EOF)
+		if (s == EOF)//breaks if end of file character read
 		{
 			break;
 		}
 		else
 		{
-			fseek(file, -1, SEEK_CUR);
-			fread(&users[i], sizeof(userdetails), 1, file);
+			fseek(file, -1, SEEK_CUR);//sets the file position of the stream to the given offset
+			fread(&users[i], sizeof(userdetails), 1, file);//reads text file data to struct User
 			i++;		
 		}
 	}
@@ -2006,14 +2046,35 @@ void change_password(struct User *user,int position)
 		printf("\nIncorrect password!!!");
 	}
 }
+
+/******************************************************************************
+* Function Name: check_item_number_duplicate(linked_list_items *head,
+                 int item_number)
+*
+* Funtion Description:
+*   -This function checks if an item id exists already in the system before a
+*    user can decide to utilize as an item number
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- linked_list_items *head,int item_number
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks for item number duplicate
+*********************************************************************************/
 int check_item_number_duplicate(linked_list_items *head,int item_number)
 {
 	
-	linked_list_items *current = head;
+	linked_list_items *current = head;//pointer to head
 
 		while (current != NULL)
 		{
-			if (current->item.item_number == item_number)
+			if (current->item.item_number == item_number)//compare item number
 			{
 				printf("\nAn item with number '%d' is already in the system,try again: ", item_number);
 				return 1;
@@ -2023,44 +2084,114 @@ int check_item_number_duplicate(linked_list_items *head,int item_number)
 	
 	return 0;
 }
+
+/***************************************************************************
+* Function Name: load_default_file(linked_list_items** head)
+*
+* Funtion Description:
+*   -This function reads data from a file named default.txt which contains
+*    sample example of warehouse items. Display error message and quits if 
+*    default file fails to open, otherwise read string line by line, split
+*    string based on specified delimeter and read into linked list head
+*    
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items **head
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): loads default file into program
+*****************************************************************************/
 int load_default_file(linked_list_items** head)
 {
+	//local variables
 	FILE *file;
+	char *token;
+	char *rest;
 	char buffer[60];
-	long int value = 0;
-	float value2 = 0;
 	struct Items new_item;
+	int i = 0;
 
-	file = fopen("default.txt", "rb");
+	memset(buffer, 0, sizeof(buffer));//set array elements to 0
+	file = fopen("default.txt", "rb");//read data from file
 
-	if (file == NULL)
+	if (file == NULL)//display error message and quit if file not found
 	{
 		printf("Error default file was not found!!");
 		Pause();
 		exit(0);
 	}
-	while (fscanf(file, "%d %s %f", &value, buffer, &value2)==3)
+	while (fgets(buffer, sizeof(buffer), file))//reads line from file stream and store in buffer array
 	{
-		new_item.item_number = value;
-		strcpy(new_item.item_description, buffer);
-		new_item.item_price = value2;
-		insert(new_item, head);
+		rest = buffer;
+		while ((token = strtok_s(rest, ",", &rest)))//splits string based on delimeter and stores in token
+		{
+			i++;
+			//converts token to appropriate data-type,store into variable and into linked list head
+			if (i == 1)sscanf(token, "%d", &new_item.item_number);
+			else if (i == 2)sscanf(token, "%[^\n]", &new_item.item_description);
+			else sscanf(token, "%f", &new_item.item_price),i=0, insert(new_item, head);
+
+		}
+
 	}
-	
 }
+
+/********************************************************************
+* Function Name: free_linked_list_items(linked_list_items **head)
+*
+* Funtion Description:
+*   -This function frees linked list memory allocated for each 
+*    structure item. This is done to avoid memory leakage
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items **head
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): free block of memory allocated
+***********************************************************************/
 void free_linked_list_items(linked_list_items **head)
 {
-	linked_list_items *temp;
-	linked_list_items *current = *head;
+	linked_list_items *temp;//pointer to hold current head
+	linked_list_items *current = *head;//pointer to deferenced head
 	while (current != NULL)
 	{
 		temp = current;
 		current = current->next;
-		free(temp);
+		free(temp);//release block of memory
 	}
 }
+
+/********************************************************************
+* Function Name: send_email(struct User *user, int position)
+*
+* Funtion Description:
+*   -This function sends an email to a user email-address in case they
+*    forgot their password.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- struct User *user, int position
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): sends email to user email address
+***********************************************************************/
 void send_email(struct User *user, int position)
 {
+	//local varaibles
 	char password[20];
 	char cmd[100]; 
 	char to[20]; 
