@@ -2005,14 +2005,37 @@ void delete_item(linked_list_items** head)
 	}
 
 }
+
+/******************************************************************************
+* Function Name: check_item_number_duplicate(linked_list_items *head,
+				 int item_number)
+*
+* Funtion Description:
+*   -This function allows a user to modify an existing password.
+*    It will first ask the user to input the current password if it matches it
+*    will then give them the possiblity to change password requestig a new one.
+*   -It displays appropriate error mesage if incorrect password provided
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- int position
+*	*IN and OUT (Reference Parameters):
+*			- struct User *user
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks for item number duplicate
+*********************************************************************************/
 void change_password(struct User *user,int position)
 {
+	//local variables
 	char buffer[20];
 	char ptr[20];
 	int flag = 0;
 	char password[20];
 
-	system("cls");
+	system("cls");//clear screen
 	printf("\n\n");
 	printf("          CHANGE PASSWORD MENU\n");
 	printf("          --------------------\n");
@@ -2020,12 +2043,13 @@ void change_password(struct User *user,int position)
 	
 	printf("Input previous password: ");
 	get_valid_password(buffer);
-	cipher_password(buffer, user[position].user_email, password, 0);
+	cipher_password(buffer, user[position].user_email, password, 0);//encypts password input
 
-	if (strcmp(password, user[position].user_password) == 0)
+	if (strcmp(password, user[position].user_password) == 0)//compare passwords
 	{
 		while (flag == 0)
 		{
+			//request new password and compare
 			printf("\n ---> Input new password: ");
 			get_valid_password(ptr);
 			printf("\n ---> Re-input password: ");
