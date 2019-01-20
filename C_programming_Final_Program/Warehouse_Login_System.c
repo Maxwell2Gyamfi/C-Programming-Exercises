@@ -603,6 +603,8 @@ void get_valid_password(char *password)
 	int success = 0;
 	do
 	{
+		k = 0;
+		i = 0;
 		memset(buffer, 0, sizeof(buffer));//sets array values to 0
 		while(k<PASSWORD_LENGHT)
 		{
@@ -1069,8 +1071,27 @@ int read_users_file(struct User *users,char *name)
 	fclose(file);
 	return i;
 }
+
+/***************************************************************************************
+* Function Name:  save_users_files(struct User *users, int count,char*name)
+*
+* Funtion Description:
+*   -This function saves users deatils to a text file
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- struct User *users, int count,char*name
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): saves data to txt file
+******************************************************************************************/
 void save_users_files(struct User *users, int count,char*name)
 {
+	//local variables
 	int i = 0;
 	FILE *file;
 	file = fopen(name, "wb");
@@ -1079,14 +1100,39 @@ void save_users_files(struct User *users, int count,char*name)
 		printf("Error saving to file");
 		exit(0);
 	}
+	//loop and save users to file
 	for (i = 0; i < count; i++)
 	{
 		fwrite(&users[i], sizeof(struct User), 1, file);
 	}
 	fclose(file);
 }
+
+/***************************************************************************************
+* Function Name:  login(struct User *user, int count)
+*
+* Funtion Description:
+*   -This function allows a user to login into the system by requesting an email address
+*    and a unique user password. If user present in the system and password correct, the
+*    user will be either presented with Admin/User Menu.
+*  - If user present and incorrect password, the user will be provided with a list of
+*    choices to make in order to proceed.
+*   
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- count(number of users)
+*	*IN (Value Parameters):
+*			- struct User *user, int count
+*	*IN and OUT (Reference Parameters):
+*			- struct User *user, int count
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): login system with password and email
+******************************************************************************************/
 int login(struct User *user, int count)
 {
+	//local variables
 	int option = 0;
 	int position = 0;
 	int success = 0;
@@ -1095,48 +1141,50 @@ int login(struct User *user, int count)
 	char password[PASSWORD_LENGHT];
 	userdetails *ptr = &user[0];
 
+	//set array values to 0
 	memset(email, 0, sizeof(email));
 	memset(password, 0, sizeof(password));
 	memset(pswd, 0, sizeof(pswd));
 
 	do
 	{
-		system("cls");
+		system("cls");//clear screen
 		printf("\n\n");
 		printf("          LOGIN MENU\n");
 		printf("          ----------\n");
 		printf("\n ---> Input email: ");
-		get_valid_email(count, user, 1,email);
+		get_valid_email(count, user, 1,email);//request and sanitize email address
         
-		position = valid_login_email(user, count, email);
+		position = valid_login_email(user, count, email);//get user position in array
 		if (position>=0 && user[position].login_attempts > 0 && user[position].is_suspended==0)
 		{
 			do
 			{
 				printf(" ---> Input password(attempts remaining:%d): ", user[position].login_attempts);
-				get_valid_password(password);
-				cipher_password(password, user[position].user_email, pswd, 0);
+				get_valid_password(password);//request and sanitize password
+				cipher_password(password, user[position].user_email, pswd, 0);//encrypt password
 				if (strcmp(user[position].user_password, pswd) == 0)
 				{
 					if (user[position].is_admin == 1)
 					{
-						count = admin_account(user, count);
+						count = admin_account(user, count);//login as admin
 					}
 					else
 					{
-						count = user_menu(user, count, position);
+						count = user_menu(user, count, position);//login as user
 					
 					}
-					ptr[position].login_attempts = 3;
+					ptr[position].login_attempts = 3;//resets login attempts
 					success = 1;
 					break;
 				}
 				else
 				{
+					//decrement login attempts
 					ptr[position].login_attempts-=1;
 					if (ptr[position].login_attempts == 0)
 					{
-						ptr[position].is_suspended = 1;
+						ptr[position].is_suspended = 1;//suspend user if attempts = 0
 						
 						if (ptr[0].is_suspended == 0)
 						{
@@ -1158,10 +1206,10 @@ int login(struct User *user, int count)
 					printf("\n  ---> 2. Send password to email");
 					printf("\n  ---> 3. Return to Login Menu");
 					printf("\n\n Select an option(1-3): ");
-					option = get_valid_integer(1, 3);
+					option = get_valid_integer(1, 3);//sanitize user selection
 					if (option == 2)
 					{
-						send_email(user, position);
+						send_email(user, position);//send email
 						break;
 					}
 
@@ -1171,6 +1219,7 @@ int login(struct User *user, int count)
 		}
 		else
 		{
+			//checks if user suspended and display account banned message
 			if (user[position].login_attempts == 0 && user[position].is_suspended==1)
 			{
 				printf("\nThis account is banned, please contact an admin(%s)", user[0].user_email);
@@ -1187,13 +1236,35 @@ int login(struct User *user, int count)
 
 	} while (success == 0);
 
-	save_users_files(user, count,"all_users.txt");
+	save_users_files(user, count,"all_users.txt");//save updated list of users to file
 	return count;
 }
+
+/***************************************************************************************
+* Function Name:  valid_login_email(struct User *user, int count,char *email)
+*
+* Funtion Description:
+*   -This function returns the position of the email address if present in the system,
+*    otherwise returns -1 as email not found as position 0 is occupied by admin
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- email address position
+*	*IN (Value Parameters):
+*			- struct User *user, int count,char *email
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): returns position of email address in the system
+******************************************************************************************/
 int valid_login_email(struct User *user, int count,char *email)
 {
-
+	
 	int i = 0;
+
+	//checks the presence of email in the system
 	for (i = 0; i < count; i++)
 	{
 		if (strcmp(user[i].user_email, email) == 0)
@@ -1203,6 +1274,24 @@ int valid_login_email(struct User *user, int count,char *email)
 	}
 	return -1;
 }
+
+/***************************************************************************************
+* Function Name:  admin_account_menu()
+*
+* Funtion Description:
+*   -This function displays the menu of admin account
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- email address position
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): displays admin account menu
+******************************************************************************************/
 void admin_account_menu()
 {
 	system("cls");
@@ -1219,25 +1308,45 @@ void admin_account_menu()
 	printf("\nSelect an option(1-7): ");
 
 }
+
+/***************************************************************************************
+* Function Name:  admin_account_menu()
+*
+* Funtion Description:
+*   -This function displays the menu of admin account
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- email address position
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): displays admin account menu
+******************************************************************************************/
 int admin_account(struct User *users, int count)
 {
+	//local variable
 	int choice = 0;
 	
 	do
 	{
 		admin_account_menu();
-		choice = get_valid_integer(1, 7);
+		choice = get_valid_integer(1, 7);//request user choice
 		switch (choice)
 		{
 		case 1:
-			count = user_menu(users,count,0);		
+			count = user_menu(users,count,0);	//displays user menu	
 			break;
 		case 2:
-			merge_sort(users, 0, count - 1);
+			merge_sort(users, 0, count - 1);//merge sorts users based on id
 			display_all_accounts(users, count);
 			Pause();
 			break;
 		case 3:
+			//sort and sort user by id
 			merge_sort(users, 0, count - 1);
 			binary_search_account(users, count - 1);
 			Pause();
@@ -1251,7 +1360,7 @@ int admin_account(struct User *users, int count)
 			Pause();
 			break;
 		case 6:
-			change_password(users,0);
+			change_password(users,0);//changes password
 			Pause();
 			break;
 		default:
@@ -2279,7 +2388,7 @@ int load_default_file(linked_list_items** head)
 			i++;
 			//converts token to appropriate data-type,store into variable and into linked list head
 			if (i == 1)sscanf(token, "%d", &new_item.item_number);
-			else if (i == 2)sscanf(token, "%[^\n]", &new_item.item_description);
+			else if (i == 2)snprintf(new_item.item_description, sizeof(new_item.item_description), "%s", token);
 			else sscanf(token, "%f", &new_item.item_price),i=0, insert(new_item, head);
 
 		}
