@@ -1385,10 +1385,11 @@ int admin_account(struct User *users, int count)
 *			- NONE
 *
 * History [Date (Author): Description)]:-
-* 2019-17-01 (Maxwell Gyamfi): displays admin account menu
+* 2019-17-01 (Maxwell Gyamfi): displays all accounts in the system
 ******************************************************************************************/
 void display_all_accounts(struct User *users,int count)
 {
+	//local variables
 	char buffer[20];
 	memset(buffer, 0, 20);
 	int i = 0;
@@ -1419,7 +1420,7 @@ void display_all_accounts(struct User *users,int count)
 			else
 				admin = 'N';
 
-			cipher_password(users[i].user_password, users[i].user_email, password, 1);
+			cipher_password(users[i].user_password, users[i].user_email, password, 1);//decrypts password
 			printf("%-4d %-20s %-16s %-10c %-16s%-4d\n",
 				users[i].user_id,
 				users[i].user_email,
@@ -1427,8 +1428,31 @@ void display_all_accounts(struct User *users,int count)
 				admin, buffer, users[i].total_items);
 	}
 }
+
+/***************************************************************************************
+* Function Name: binary_search_account(struct User *user, int count)
+*
+* Funtion Description:
+*   -This function Search a sorted array by repeatedly dividing the search interval in half.
+    -It begins with an interval covering the whole array. 
+	-If the value of the id is less than the item in the middle of the interval, 
+	  narrow the interval to the lower half. Otherwise narrow it to the upper half. 
+	- Repeatedly check until the value is found or the interval is empty.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- struct User *users,int count
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): binary search user account
+******************************************************************************************/
 void binary_search_account(struct User *user, int count)
 {
+	//local variables
 	int value = 0;
 	int start = 0;
 	int half = 0;
@@ -1448,8 +1472,10 @@ void binary_search_account(struct User *user, int count)
 
 	while (start <= end)
 	{
+		   //finds midde of array
 		    half = (start +end) / 2;
 		
+			// If the element is present at the middle itself 
 			if (user[half].user_id == value)
 			{
 				if (user[half].is_suspended == 1)
@@ -1461,7 +1487,7 @@ void binary_search_account(struct User *user, int count)
 				else
 					admin = 'N';
 
-				cipher_password(user[half].user_password, user[half].user_email, password, 1);
+				cipher_password(user[half].user_password, user[half].user_email, password, 1);//decrypts password
 
 				printf("\nID   Email                Password         Admin      Suspended       Total Items\n");
 				printf("--   -----                --------         -----      ---------       -----------\n");
@@ -1476,10 +1502,14 @@ void binary_search_account(struct User *user, int count)
 			}
 			else
 			{
+				// If element is smaller than mid, then 
+		        // it can only be present in left subarray 
 				if (value > user[half].user_id)
 				{
 					start = half + 1;
 				}
+				//Else the element can only be present
+				// in right subarray 
 				else
 				{
 					end = half - 1;
@@ -1491,6 +1521,30 @@ void binary_search_account(struct User *user, int count)
 		printf("Element not found");
 	}
 }
+
+
+/***************************************************************************************
+* Function Name: merge_sort(struct User *user, int min, int max)
+*
+* Funtion Description:
+*   -This function is a divide and conquer algorithm.
+*   -It first finds the middle point of the list, and recursively divide the list
+*    until at the bottom there are only two elements left.
+*   -It compares the elements and swap their indexes.
+*   -It returns te sorted list once the lenght is less than or 1   
+*  
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- struct User *user, int min, int max
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): merge sort array
+******************************************************************************************/
 int merge_sort(struct User *user, int min, int max)
 {
 
@@ -1498,25 +1552,47 @@ int merge_sort(struct User *user, int min, int max)
 
 	if (min < max)
 	{
-		middle = (min + max) / 2;
+		middle = (min + max) / 2;//calculate middle value
 
+		//sort first and second halves
 		merge_sort(user, min, middle);
 		merge_sort(user, middle + 1, max);
-		merge(user, min, middle, middle + 1, max);
+		merge(user, min, middle, middle + 1, max);//merge halves back into one
 	}
 
 }
+
+/***************************************************************************************
+* Function Name: merge(struct User *user, int min, int middle, int middle2, int max)
+*
+* Funtion Description:
+*   This function traverse both arrays and in each iteration add smaller of both 
+*   elements in temp array  
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- int min, int middle, int middle2, int max
+*	*IN and OUT (Reference Parameters):
+*			- struct User *user
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): merge arrays halves back
+******************************************************************************************/
 void merge(struct User *user, int min, int middle, int middle2, int max)
 {
 	struct User temp[MAX_ACCOUNTS];
-
+	//local variables
 	int l = 0;
 	int i = min;
 	int j = middle2;
 
+	// traverse both arrays and in each iteration add smaller of both elements in temp
 	while (i <= middle && j <= max)
 	{
-		if (user[i].user_id < user[j].user_id)
+		if (user[i].user_id < user[j].user_id)//compare ids
 		{
 			temp[l++] = user[i++];
 		}
@@ -1525,19 +1601,42 @@ void merge(struct User *user, int min, int middle, int middle2, int max)
 			temp[l++] = user[j++];
 		}
 	}
+	// add elements left in the first interval 
 	while (i <= middle)
 	{
 		temp[l++] = user[i++];
 	}
+	// add elements left in the second interval 
 	while (j <= max)
 	{
 		temp[l++] = user[j++];
 	}
+	// copy temp to original interval
 	for (l = min, j = 0; l <= max; l++, j++)
 	{
 		user[l] = temp[j];
 	}
 }
+
+/***************************************************************************************
+* Function Name: merge(struct User *user, int min, int middle, int middle2, int max)
+*
+* Funtion Description:
+*   This function traverse both arrays and in each iteration add smaller of both
+*   elements in temp array
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- int min, int middle, int middle2, int max
+*	*IN and OUT (Reference Parameters):
+*			- struct User *user
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): merge arrays halves back
+******************************************************************************************/
 void suspend_user(struct User *user, int count)
 {
 
