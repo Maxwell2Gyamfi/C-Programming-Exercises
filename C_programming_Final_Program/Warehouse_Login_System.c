@@ -1317,9 +1317,9 @@ void admin_account_menu()
 *
 * User-interface variables:-
 *	*OUT (Return values):
-*			- email address position
+*			- count
 *	*IN (Value Parameters):
-*			- NONE
+*			- struct User *users, int count
 *	*IN and OUT (Reference Parameters):
 *			- NONE
 *
@@ -1369,6 +1369,24 @@ int admin_account(struct User *users, int count)
 	} while (choice != 7);
 	return count;
 }
+
+/***************************************************************************************
+* Function Name:  display_all_accounts(struct User *users,int count)
+*
+* Funtion Description:
+*   -This function displays all the users accounts present in the system
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE 
+*	*IN (Value Parameters):
+*			- struct User *users,int count
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): displays admin account menu
+******************************************************************************************/
 void display_all_accounts(struct User *users,int count)
 {
 	char buffer[20];
