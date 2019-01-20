@@ -1855,6 +1855,27 @@ void insert(items user_items, linked_list_items **item)
 	}
 	last->next = new_linked_list;
 }
+
+/*************************************************************************************
+* Function Name: linked_list_items * sortedmerge(linked_list_items* a, 
+                 linked_list_items* b)
+*
+* Funtion Description:
+*   -This function takes two lists sorted in increasing order, and splices 
+*    their nodes together to make one big sorted list which 
+*    is returned.  
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- linked_list_items* a, linked_list_items* b
+*	*IN and OUT (Reference Parameters):
+*			- result
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (geeksforgeeks.org): merges the two list halves 
+************************************************************************************/
 linked_list_items * sortedmerge(linked_list_items* a, linked_list_items* b)
 {
 	linked_list_items* result = NULL;
@@ -1874,6 +1895,28 @@ linked_list_items * sortedmerge(linked_list_items* a, linked_list_items* b)
 	}
 	return result;
 }
+
+/*************************************************************************************
+* Function Name: frontbacksplit(linked_list_items* head, linked_list_items** aref, 
+*                linked_list_items** bref)
+*
+* Funtion Description:
+*   -This function splits the nodes of the given list into front and back halves, 
+     and return the two lists using the reference parameters. 
+    -If the length is odd, the extra node should go in the front list. 
+     Uses the fast/slow pointer strategy.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- linked_list_items* head
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items** aref, linked_list_items** bref
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (geeksforgeeks.org): splits the node into front and back halves
+************************************************************************************/
 void frontbacksplit(linked_list_items* head, linked_list_items** aref, linked_list_items** bref)
 {
 	linked_list_items* slow;
@@ -1885,8 +1928,11 @@ void frontbacksplit(linked_list_items* head, linked_list_items** aref, linked_li
 	}
 	else
 	{
+
 		slow = head;
 		fast = head->next;
+
+		/* Advance 'fast' two nodes, and advance 'slow' one node */
 		while (fast != NULL)
 		{
 			fast = fast->next;
@@ -1896,37 +1942,83 @@ void frontbacksplit(linked_list_items* head, linked_list_items** aref, linked_li
 				fast = fast->next;
 			}
 		}
+		/* 'slow' is before the midpoint in the list, so split it in two
+	       at that point. */
 		*aref = head;
 		*bref = slow->next;
 		slow->next = NULL;
 	}
 }
+
+/*************************************************************************************
+* Function Name: mergesort(linked_list_items** headref)
+*
+* Funtion Description:
+*   -This function sorts linked list by changing next pointers(not data)
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items** headref
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (geeksforgeeks.org): sorts linked list
+************************************************************************************/
 void mergesort(linked_list_items** headref)
 {
 	linked_list_items* head = *headref;
 	linked_list_items* a;
 	linked_list_items* b;
+
+	/* Base case -- length 0 or 1 */
 	if ((head == NULL) || (head->next == NULL))
 		return;
+	/* Split head into 'a' and 'b' sublists */
 	frontbacksplit(head, &a, &b);
+
+	/* Recursively sort the sublists */
 	mergesort(&a);
 	mergesort(&b);
+	//answer = merge the two sorted lists together
 	*headref = sortedmerge(a, b);
 }
+
+/*************************************************************************************
+* Function Name: search_item(linked_list_items* head)
+*
+* Funtion Description:
+*   -This function allows a user to search for an item accross the warehouse.
+*   -Displays 'item not found' if item non-existent otherwise displays item-number,
+*    description and price
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- linked_list_items* head
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): searchs item accross warehouse
+************************************************************************************/
 void search_item(linked_list_items* head)
 {
 	int item_number = 0;
-	linked_list_items * current = head;
+	linked_list_items * current = head;//pointer to linked list head
 	system("cls");
 	printf("\n\n      SEARCH AN ITEM MENU\n");
 	printf("       -------------------\n");
 
 	printf("---> Input item to be searched(1-30000): ");
-	item_number = get_valid_integer(1, 30000);
+	item_number = get_valid_integer(1, 30000);//request item number
 
 	while (current != NULL)
 	{
-		if (current->item.item_number == item_number)
+		if (current->item.item_number == item_number)//compares item number
 		{
 			printf("\nItem Number              Item Description                         Item Price\n");
 			printf("-----------              ----------------                         ----------\n");
@@ -1934,37 +2026,64 @@ void search_item(linked_list_items* head)
 				current->item.item_number, current->item.item_description,POUND_SIGN, current->item.item_price);
 			return;
 		}
-		current = current->next;
+		current = current->next;//change current head
 	}
 	printf("\nItem not found!!!");
 	return;
 
 
 }
+
+/*************************************************************************************
+* Function Name: delete_item(linked_list_items** head)
+*
+* Funtion Description:
+*   -This function allows a user to select items and delete from warehouse.
+*   -It will first clear the output console and display all items prompting
+*    user to select an item.
+*   -It checks if head node itself holds the item number of item to be deleted.
+*    In case it does it changes head and free old head.
+*   -If item was not found it displays 'item not found message and returns,otherwise
+*    it will keep looking for item until found.
+*   -Finally it will display all items proving item was successfully deleted.
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- int position
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items** head
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): deletes item from warehouse
+************************************************************************************/
 void delete_item(linked_list_items** head)
 {
+	//local variables
 	int itemnumber = 0;
 	char *choice = '\0';
 	linked_list_items *previous =NULL;
-	linked_list_items *current = *head;
+	linked_list_items *current = *head;//dereference and store head node
 	
-	system("cls");
+	system("cls");//clear screen
 	printf("\n\n");
 	printf("  DELETE AN ITEM MENU\n");
 	printf("  -------------------");
 
 	display_items(current);
 	printf("\nSelect item to be removed: ");
-	itemnumber = get_valid_integer(1, 30000);
-	
+	itemnumber = get_valid_integer(1, 30000);//sanitize user input
+
+	//checks if head node itself holds the item number of item to be deleted
 	if (current != NULL && current->item.item_number == itemnumber)
 	{
 		printf("Confirm removing selected item?(Y/N): ");
-		choice = get_valid_yes_or_no();
+		choice = get_valid_yes_or_no();////ensure user choice of deleting
 		if (choice == 'Y')
 		{
-			*head = current->next;
-			free(current);
+			*head = current->next;//change head
+			free(current);//free old head
 			display_items(*head);
 			printf("\nSelected item successfully removed!!!");	
 			return;
@@ -1976,12 +2095,15 @@ void delete_item(linked_list_items** head)
 		}
 	}
 
+	// Search for the item to be deleted, keep track of the 
+	// previous node as we need to change 'prev->next'
 	while (current != NULL && current->item.item_number !=itemnumber)
 	{
 		previous = current;
 		current = current->next;
 	}
 
+	//display message and return if item not found
 	if (current == NULL)
 	{
 		printf("Item was not found");
@@ -1989,11 +2111,12 @@ void delete_item(linked_list_items** head)
 	}
 
 	printf("\nConfirm removing selected item?(Y/N): ");
-	choice = get_valid_yes_or_no();
+	choice = get_valid_yes_or_no();//ensure user choice of deleting
 	if (choice == 'Y')
 	{
+		//unlink node from linked list
 		previous->next = current->next;
-		free(current);
+		free(current);//free memory
 		display_items(*head);
 		printf("\nSelected item successfully removed!!!");
 		return;
@@ -2006,13 +2129,12 @@ void delete_item(linked_list_items** head)
 
 }
 
-/******************************************************************************
-* Function Name: check_item_number_duplicate(linked_list_items *head,
-				 int item_number)
+/*******************************************************************************
+* Function Name: change_password(struct User *user,int position)
 *
 * Funtion Description:
 *   -This function allows a user to modify an existing password.
-*    It will first ask the user to input the current password if it matches it
+*    It will first request current password from user and if it matches it
 *    will then give them the possiblity to change password requestig a new one.
 *   -It displays appropriate error mesage if incorrect password provided
 *
@@ -2025,7 +2147,7 @@ void delete_item(linked_list_items** head)
 *			- struct User *user
 *
 * History [Date (Author): Description)]:-
-* 2019-17-01 (Maxwell Gyamfi): checks for item number duplicate
+* 2019-17-01 (Maxwell Gyamfi): changes user password
 *********************************************************************************/
 void change_password(struct User *user,int position)
 {
@@ -2057,8 +2179,8 @@ void change_password(struct User *user,int position)
 
 			if (strcmp(ptr, buffer) == 0)
 			{
-				cipher_password(ptr, user[position].user_email,buffer,0);
-				strcpy(user[position].user_password, buffer);
+				cipher_password(ptr, user[position].user_email,buffer,0);//encrypts password
+				strcpy(user[position].user_password, buffer);//saves new password
 				printf("\nPassword successfully changed!!!");
 				flag = 1;
 			}
@@ -2151,7 +2273,7 @@ int load_default_file(linked_list_items** head)
 	}
 	while (fgets(buffer, sizeof(buffer), file))//reads line from file stream and store in buffer array
 	{
-		rest = buffer;
+		rest = buffer;//pointer to buffer array
 		while ((token = strtok_s(rest, ",", &rest)))//splits string based on delimeter and stores in token
 		{
 			i++;
