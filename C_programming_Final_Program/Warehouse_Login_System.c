@@ -1861,7 +1861,7 @@ int remove_account(struct User *users, int count,int position,linked_list_items*
 	choice = get_valid_yes_or_no();
 	if (choice == 'Y')
 	{
-		free_linked_list_items(head);//free block of memory
+		free_linked_list_items(head);//free block of memory allocated
 		status = remove(users[position].user_email);//remove user file
 		//push user account to edge of array
 		while (position < count)
