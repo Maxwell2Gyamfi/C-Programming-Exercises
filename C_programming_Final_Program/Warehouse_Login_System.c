@@ -1914,10 +1914,32 @@ void user_account_menu()
 	printf("  7  ---> Return to Main Menu");
 
 }
+
+/******************************************************************************************
+* Function Name: user_menu(struct User *user,int count,int position)
+*
+* Funtion Description:
+*   This function allows a user to select an option of user.
+*   At first it will check if the user has any previous records in the system. If yes then
+*   it will display the user account menu to the user prompting for a selection, otherwise
+*   it will load the default file of the warehouse, containing warehouse items.
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- count
+*	*IN (Value Parameters):
+*			- int count,int position
+*	*IN and OUT (Reference Parameters):
+*			- struct User *user
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): displays user account menu
+******************************************************************************************/
 int user_menu(struct User *user,int count,int position)
 {
 	linked_list_items *head = NULL;
-	
+    //loads default file if first time accessing system
 	if (!read_items_from_file(&head, user[position].user_email))
 	{
 		load_default_file(&head);
@@ -1926,7 +1948,7 @@ int user_menu(struct User *user,int count,int position)
 
 	do
 	{
-		update_total_elements(head,user,position);
+		update_total_elements(head,user,position);//counts amount of elements present in system
 		user_account_menu();
 		printf("\n\nInput your choice(1-7): ");
 		choice = get_valid_integer(1, 7);
@@ -1934,13 +1956,13 @@ int user_menu(struct User *user,int count,int position)
 		switch (choice)
 		{
 		case 1:
-			append(&head);
+			append(&head);//allows to add new item to warehouse
 			update_total_elements(head,user,position);
 			Pause();
-			save_items_to_file(head, user[position].user_email);
+			save_items_to_file(head, user[position].user_email);//save warehouse items to file and rename with user email
 			break;
 		case 2:
-			mergesort(&head),
+			mergesort(&head),//merge sort linked list nodes
 			display_items(head);
 			Pause();
 			break;
@@ -1949,7 +1971,7 @@ int user_menu(struct User *user,int count,int position)
 			Pause();
 			break;
 		case 4:
-			delete_item(&head);
+			delete_item(&head);//delete nodes
 			update_total_elements(head,user,position);
 			Pause();
 			save_items_to_file(head, user[position].user_email);
@@ -1959,18 +1981,39 @@ int user_menu(struct User *user,int count,int position)
 			Pause();
 			break;
 		case 6:
-			count = remove_account(user,count,position,&head);
+			count = remove_account(user,count,position,&head);//remove user account from system
 			Pause();
-			if (position != 0)
+			if (position != 0)//quits and returns to main menu if user deletes account
 			{
 				return count;
 			}
 			break;
 		}
 	} while (choice != 7);
-	free_linked_list_items(&head);
+	free_linked_list_items(&head);//free block of memory allocated
 	return count;
 }
+
+/******************************************************************************************
+* Function Name: user_menu(struct User *user,int count,int position)
+*
+* Funtion Description:
+*   This function allows a user add a new item to the warehouse.
+*   It requests an item number checking for duplicates, item description and price.
+*   It then appends the new item to the linked list head
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items **linked
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): adds new item to warehouse
+******************************************************************************************/
 void append(linked_list_items **linked)
 {
 	linked_list_items * new_linked_list = malloc(sizeof(linked_list_items));
@@ -1990,9 +2033,10 @@ void append(linked_list_items **linked)
 	printf("        ADD NEW ITEM MENU\n");
 	printf("        -----------------\n");
 
+	//request item details
 	printf("\nInput item number(1-30000): ");
 	item.item_number = get_valid_integer(1, 30000);
-	while (check_item_number_duplicate(temp, item.item_number))
+	while (check_item_number_duplicate(temp, item.item_number))//check for item number duplicate
 	{
 		item.item_number = get_valid_integer(1, 30000);
 		check_item_number_duplicate(temp, item.item_number);
@@ -2004,10 +2048,10 @@ void append(linked_list_items **linked)
 	printf("Input item price(1-9999): ");
 	item.item_price = get_valid_integer(1, 9999);
 
-	new_linked_list->item = item;
+	new_linked_list->item = item;//ads item to linked list
 
-	new_linked_list->next = NULL;
-	if (*linked == NULL)
+	new_linked_list->next = NULL;//set mext to NULL as appending to end
+	if (*linked == NULL)//if there are no nodes then add item
 	{
 		*linked = new_linked_list;
 		display_items(start);
@@ -2016,7 +2060,7 @@ void append(linked_list_items **linked)
 		return;
 	}
 
-	while (last->next != NULL)
+	while (last->next != NULL)//while last node not reached,move to next
 	{
 		last = last->next;
 	}
@@ -2026,20 +2070,61 @@ void append(linked_list_items **linked)
 	
 
 }
+
+/******************************************************************************************
+* Function Name: update_total_elements(linked_list_items *head,struct User 
+           *user,int position)
+*
+* Funtion Description:
+*   This function the calculates total amount of elements in a warehouse
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- linked_list_items *head,int position
+*	*IN and OUT (Reference Parameters):
+*			- struct User *user
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): calculates number of elements in linked list
+******************************************************************************************/
 void update_total_elements(linked_list_items *head,struct User *user,int position)
 {
 	int total_elements = 0;
+
 	while (head != NULL)
 	{
 		head = head->next;
 		total_elements++;
 	}
+	//change value of total elements at position in array
 	user[position].total_items = total_elements;
 }
+
+/******************************************************************************************
+* Function Name: display_items(linked_list_items * start)
+*
+* Funtion Description:
+*   This function displays the itemsin the warehouse
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- linked_list_items * start
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): displays items in the warehouse
+******************************************************************************************/
 void display_items(linked_list_items * start)
 {
 	
-	system("cls");
+	system("cls");//clear screen
 	printf("\n\n");
 	printf("                  DISPLAY ALL ITEMS\n");
 	printf("                  -----------------\n");
@@ -2052,7 +2137,7 @@ void display_items(linked_list_items * start)
 	{
 		printf("\nItem Number              Item Description                         Item Price\n");
 		printf("-----------              ----------------                         ----------\n");
-
+		//display item details
 		while (start != NULL)
 		{
 			printf("%-25d%-41s%c %5.1f\n",
