@@ -2045,8 +2045,8 @@ void append(linked_list_items **linked)
 	printf("Input item description(max char:40): ");
 	get_valid_string(item.item_description);
 
-	printf("Input item price(1-9999): ");
-	item.item_price = get_valid_integer(1, 9999);
+	printf("Input item price(1-9999999): ");
+	item.item_price = get_valid_integer(1, 9999999);
 
 	new_linked_list->item = item;//ads item to linked list
 
@@ -2107,7 +2107,7 @@ void update_total_elements(linked_list_items *head,struct User *user,int positio
 * Function Name: display_items(linked_list_items * start)
 *
 * Funtion Description:
-*   This function displays the itemsin the warehouse
+*   This function displays the items in the warehouse
 *
 *
 * User-interface variables:-
@@ -2147,31 +2147,69 @@ void display_items(linked_list_items * start)
 	}
 	
 }
+
+/******************************************************************************************
+* Function Name: get_valid_string(char *string)
+*
+* Funtion Description:
+*   This function allows a user to give a description to an item
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- char *string
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): get valid string
+******************************************************************************************/
 void get_valid_string(char *string)
 {
 	char buffer[MAX_LENGHT_DESCRIPTION];
 	int success = 0;
 	do
 	{
-		fgets(buffer, sizeof(buffer), stdin);
+		fgets(buffer, sizeof(buffer), stdin);//request user input
 		int lenght = strlen(buffer);
 		buffer[lenght - 1] = '\0';
 
-		if (strlen(buffer) < 1)
+		if (strlen(buffer) < 1)//checks if too short
 		{
 			printf("Decription too short, try again: ");
 		}
-		else if (strlen(buffer) > MAX_LENGHT_DESCRIPTION)
+		else if (strlen(buffer) > MAX_LENGHT_DESCRIPTION)//checks if too long
 		{
 			printf("Decription too long, try again: ");
 		}
 		else
 		{
-			strcpy(string, buffer);
+			strcpy(string, buffer);//copy string into string array
 			success = 1;
 		}
 	} while (success == 0);
 }
+
+/******************************************************************************************
+* Function Name: Pause()
+*
+* Funtion Description:
+*   This function pauses the screen prompting the user to press any key to proceed
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): pauses screen
+******************************************************************************************/
 void Pause()
 {
 
@@ -2179,12 +2217,31 @@ void Pause()
 	getch();
 
 }
+
+/******************************************************************************************
+* Function Name: save_items_to_file(linked_list_items *item,char *account_email)
+*
+* Funtion Description:
+*   This function saves linked list node items into a text file
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- linked_list_items *item,char *account_email
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): save items to file
+******************************************************************************************/
 void save_items_to_file(linked_list_items *item,char *account_email)
 {
 	FILE *file;
 	items user_item;
 	linked_list_items *head = item;
-	file = fopen(account_email, "wb");
+	file = fopen(account_email, "wb");//open file 
 	if (file == NULL)
 	{
 		printf("Error writing to file");
@@ -2192,28 +2249,48 @@ void save_items_to_file(linked_list_items *item,char *account_email)
 	}
 	while (head != NULL)
 	{
-		user_item = head->item;
-		fwrite(&user_item, sizeof(items), 1, file);
+		user_item = head->item;//save item local variable
+		fwrite(&user_item, sizeof(items), 1, file);//write data to file
 		head = head->next;
 	}
 	fclose(file);
 
 }
+
+/******************************************************************************************
+* Function Name: read_items_from_file(linked_list_items **item, char *account_email)
+*
+* Funtion Description:
+*   This function reads data from file and inserts them into linked list node
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- count
+*	*IN (Value Parameters):
+*			- char *account_email
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items **item
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): save items to file
+******************************************************************************************/
 int read_items_from_file(linked_list_items **item, char *account_email)
 {
-
+	//local varaibles
 	FILE *file;
 	char *s;
 	int count = 0;
 	items user_item;
 
-	file = fopen(account_email, "rb");
+	file = fopen(account_email, "rb");//open file
 
 	if (file == NULL)
 	{
 		return 0;
 	}
 
+	//while end of file character not reached, read data and insert to linked list
 	while (s = fgetc(file))
 	{
 		if (s == EOF)
@@ -2222,19 +2299,40 @@ int read_items_from_file(linked_list_items **item, char *account_email)
 		}
 		else
 		{
-			fseek(file, -1, SEEK_CUR);
+			fseek(file, -1, SEEK_CUR);//avoid reading past eof character
 			fread(&user_item, sizeof(items), 1, file);
-			insert(user_item, item);
+			insert(user_item, item);//insert item at end of linked list
 			count++;
 		}
 	}
 	fclose(file);
 	return(count > 0 ? 1 : 0);
 }
+
+/******************************************************************************************
+* Function Name: insert(items user_items, linked_list_items **item)
+*
+* Funtion Description:
+*   This function inserts read data from text file back into linked list nodes.
+*   if there are no nodes in linked then the item is the first node itself otherwise,
+*   traverse linked list until NULL reached and append item.
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			-NONE
+*	*IN (Value Parameters):
+*			- items user_items
+*	*IN and OUT (Reference Parameters):
+*			- linked_list_items **item
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): insert read items to linked list
+******************************************************************************************/
 void insert(items user_items, linked_list_items **item)
 {
 
-	linked_list_items * new_linked_list = malloc(sizeof(linked_list_items));
+	linked_list_items * new_linked_list = malloc(sizeof(linked_list_items));//allocate memory
 	linked_list_items *last = *item;
 
 	if (new_linked_list == NULL)
@@ -2243,7 +2341,7 @@ void insert(items user_items, linked_list_items **item)
 		exit(0);
 	}
 
-	new_linked_list->item = user_items;
+	new_linked_list->item = user_items;//add item to new linked list
 	new_linked_list->next = NULL;
 
 	if (*item == NULL)
