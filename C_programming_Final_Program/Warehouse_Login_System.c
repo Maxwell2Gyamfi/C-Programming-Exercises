@@ -1619,31 +1619,30 @@ void merge(struct User *user, int min, int middle, int middle2, int max)
 }
 
 /***************************************************************************************
-* Function Name: merge(struct User *user, int min, int middle, int middle2, int max)
+* Function Name: suspend_user(struct User *user, int count)
 *
 * Funtion Description:
-*   This function traverse both arrays and in each iteration add smaller of both
-*   elements in temp array
+*   This function allows the admin of the system to suspend a desired user account
 *
 *
 * User-interface variables:-
 *	*OUT (Return values):
 *			- NONE
 *	*IN (Value Parameters):
-*			- int min, int middle, int middle2, int max
+*			- int count
 *	*IN and OUT (Reference Parameters):
 *			- struct User *user
 *
 * History [Date (Author): Description)]:-
-* 2019-17-01 (Maxwell Gyamfi): merge arrays halves back
+* 2019-17-01 (Maxwell Gyamfi): suspends a user
 ******************************************************************************************/
 void suspend_user(struct User *user, int count)
 {
-
+	//local variables
 	int i = 0;
 	int id = 0;
 	char choice = 0;
-	struct User *temp = user;
+	struct User *temp = user;//pointer to struct user
 
 	system("cls");
 	printf("\n\n");
@@ -1651,6 +1650,7 @@ void suspend_user(struct User *user, int count)
 	printf("              -----------------------\n");
 	if (count > 1)
 	{
+		//display all accounts and request selection
 		display_all_accounts(user, count);
 		printf("\nSelect account to suspend(%d-%d): ",user[1].user_id,user[count-1].user_id);
 		id = get_valid_integer(user[1].user_id, user[count - 1].user_id);
@@ -1663,8 +1663,8 @@ void suspend_user(struct User *user, int count)
 				choice = get_valid_yes_or_no();
 				if (choice == 'Y')
 				{
-					user = user + i;
-					user->is_suspended = 1;
+					user = user + i;//pointer aritmetic
+					user->is_suspended = 1;//suspend user
 					user->login_attempts = 0;
 					display_all_accounts(temp, count);
 					printf("\nAccount succesfully suspended!!!");
@@ -1683,14 +1683,35 @@ void suspend_user(struct User *user, int count)
 	}
 
 }
+
+/***************************************************************************************
+* Function Name: unsuspend_user(struct User *user, int count)
+*
+* Funtion Description:
+*   This function allows the admin of the system to unsuspend a desired user account
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- int count
+*	*IN and OUT (Reference Parameters):
+*			- struct User *user
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): unsuspends a user
+******************************************************************************************/
 void unsuspend_user(struct User *user, int count)
 {
 
+	//local variables
 	int i = 0;
 	int id = 0;
 	char choice = 0;
 	int suspended_counter = 0;
-	struct User *suspended_list=(struct User*)calloc(MAX_ACCOUNTS,sizeof(struct User));
+	//memory allocation for array of suspended list
+	struct User *suspended_list;
 	struct User *temp = user;
 	
 	system("cls");
@@ -1717,11 +1738,13 @@ void unsuspend_user(struct User *user, int count)
 		{
 			if (user[i].is_suspended == 1 && user[i].login_attempts == 0)
 			{
+				//adds suspended users to suspended list
 				suspended_list[suspended_counter++] = user[i];
 			}
 		}
 		if (suspended_counter > 0)
 		{
+			//displays all suspended users and request selection
 			display_all_accounts(suspended_list, suspended_counter);
 			printf("\nSelect account to unsuspend(%d-%d): ", suspended_list[0].user_id, suspended_list[suspended_counter - 1].user_id);
 			id = get_valid_integer(suspended_list[0].user_id, suspended_list[suspended_counter-1].user_id);
@@ -1736,7 +1759,7 @@ void unsuspend_user(struct User *user, int count)
 							choice = get_valid_yes_or_no();
 							if (choice == 'Y')
 							{
-								user += i;
+								user += i;//pointer aritmetic
 								user->is_suspended = 0;
 								user->login_attempts = 3;
 								display_all_accounts(temp, count);
@@ -1754,13 +1777,35 @@ void unsuspend_user(struct User *user, int count)
 			else printf("\nIncorrect Account ID selection!!!");
 		}
 		else printf("\nThere are no accounts to be unsuspended!!!");
-		free(suspended_list);
+		free(suspended_list);//free block of memory allocated
 	}
 }
+
+/***************************************************************************************
+* Function Name: id_exist(struct User*banned, int count,int id)
+*
+* Funtion Description:
+*   This function checks if a user account is suspended by comparing the id to the ids of
+*   banned list array
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- bool(1:True,0:False)
+*	*IN (Value Parameters):
+*			- struct User*banned, int count,int id
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): checks if a user is on suspended list
+******************************************************************************************/
 int id_exist(struct User*banned, int count,int id)
 {
+	//local variables
 	int i = 0;
 
+	//loop and check if account is suspended
 	for (i = 0; i < count; i++)
 	{
 		if (banned[i].user_id == id)
@@ -1770,8 +1815,35 @@ int id_exist(struct User*banned, int count,int id)
 	}
 	return 0;
 }
+
+/***************************************************************************************
+* Function Name: remove_account(struct User *users, int count,int position,
+*                linked_list_items**head)
+*
+* Funtion Description:
+*   This function allows the user of the system to permanently remove a account from 
+*   the system.
+*   It denies permission if the admin of the system tries to delete their own account
+*   otherwise it will request confirmation of the user deleting their account and if 
+*   they decide to carry on, it will free all heads of linked list items,removed user
+*   text file from system, push the user in the array to the edge and reduce the number
+*   of system users by 1.
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- count
+*	*IN (Value Parameters):
+*			- int position,int count
+*	*IN and OUT (Reference Parameters):
+*			- struct User *users,linked_list_items**head
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): removes user account from system
+******************************************************************************************/
 int remove_account(struct User *users, int count,int position,linked_list_items**head)
 {
+	//local variables
 	int status = 0;
 	int i = 0;
 	char choice = '\0';
@@ -1789,9 +1861,9 @@ int remove_account(struct User *users, int count,int position,linked_list_items*
 	choice = get_valid_yes_or_no();
 	if (choice == 'Y')
 	{
-		free_linked_list_items(head);
-		status = remove(users[position].user_email);
-
+		free_linked_list_items(head);//free block of memory
+		status = remove(users[position].user_email);//remove user file
+		//push user account to edge of array
 		while (position < count)
 		{
 			temp = ptr[position];
@@ -1800,7 +1872,7 @@ int remove_account(struct User *users, int count,int position,linked_list_items*
 			position++;
 		}
 		count -= 1;
-		save_users_files(users, count,"all_users.txt");
+		save_users_files(users, count,"all_users.txt");//save updated users back to file
 		printf("\nAccount removed successfully!!!!");
 	}
 	else
@@ -1809,9 +1881,28 @@ int remove_account(struct User *users, int count,int position,linked_list_items*
 	}
 	return count;
 }
+
+/***************************************************************************************
+* Function Name: user_account_menu()
+*
+* Funtion Description:
+*   This function displays the main menu of the users account
+*
+*
+* User-interface variables:-
+*	*OUT (Return values):
+*			- NONE
+*	*IN (Value Parameters):
+*			- NONE
+*	*IN and OUT (Reference Parameters):
+*			- NONE
+*
+* History [Date (Author): Description)]:-
+* 2019-17-01 (Maxwell Gyamfi): displays user account menu
+******************************************************************************************/
 void user_account_menu()
 {
-	system("cls");
+	system("cls");//clears screen
 	printf("\n\n            USER MENU\n");
 	printf("            ---------\n\n");
 	printf("  1  ---> Add an Item\n");
