@@ -1853,7 +1853,7 @@ int remove_account(struct User *users, int count,int position,linked_list_items*
 
 	if (position == 0)
 	{
-		printf("\n\Admin account cannot be removed,\nPlease contact developer('Maxwell2.Gyamfi@live.uwe.ac.uk')");
+		printf("\nAdmin account cannot be removed,\nPlease contact developer('Maxwell2.Gyamfi@live.uwe.ac.uk')");
 		return count;
 	}
 	
